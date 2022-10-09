@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addbtn: ImageView;
     private lateinit var rembtn: ImageView;
     private lateinit var resetbtn: ImageView;
+    private lateinit var torndpagebtn: ImageView;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +23,24 @@ class MainActivity : AppCompatActivity() {
         addbtn = findViewById(R.id.add)
         rembtn = findViewById(R.id.rem)
         resetbtn = findViewById(R.id.res)
+        torndpagebtn = findViewById(R.id.btnToRndPage)
 
         addbtn.setOnClickListener { addPoint() }
         rembtn.setOnClickListener { remPoint() }
         resetbtn.setOnClickListener { resetPoint() }
+        torndpagebtn.setOnClickListener { toRndPage() }
 
+    }
+
+    fun toRndPage() {
+        val rndPageIntent = Intent(this, RandomNumberActivity::class.java)
+
+        val countStr: String = textView.text.toString()
+        val count: Int = Integer.parseInt(countStr)
+
+        rndPageIntent.putExtra(RandomNumberActivity.RANDOM_TO, count)
+
+        startActivity(rndPageIntent)
     }
 
     fun addPoint() {
@@ -43,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         var count: Int = Integer.parseInt(countStr)
         count--
 
-        textView.text = count.toString()
+        if (count >= 0) {
+            textView.text = count.toString()
+        }
     }
 
     fun resetPoint() {
