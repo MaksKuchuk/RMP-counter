@@ -4,4 +4,5 @@
     <string name="todo">TODO</string>
     <string name="todo1">TODO</string>
     <string name="todo2">TODO</string>
+    <string name="random_number_from_0_to">Random number from 0 to</string>
 </resources>
